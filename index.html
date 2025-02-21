@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAP PI/PO Receiver Determination Comparison</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <h2>SAP PI/PO Receiver Determination Comparison Tool</h2>
+    <textarea id="devXML" rows="10" cols="50" placeholder="Paste Dev XML here..."></textarea><br>
+    <textarea id="prodXML" rows="10" cols="50" placeholder="Paste Prod XML here..."></textarea><br>
+    <button onclick="compareXML()">Compare</button>
+    <button onclick="exportHighlightedRowsToExcel()">Export Highlighted Differences</button>
+    <div id="output"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
