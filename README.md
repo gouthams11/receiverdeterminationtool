@@ -15,7 +15,7 @@ This is a web-based tool to compare SAP PI/PO Receiver Determination configurati
 4. Click **Export Highlighted Differences** to download a filtered Excel file.
 
 ## Deployment
-This tool is hosted using **GitHub Pages**. You can access it (https://gouthams11.github.io/receiverdeterminationtoll/).
+This tool is hosted using **GitHub Pages**. You can access it (https://gouthams11.github.io/receiverdeterminationtool/).
 
 ## Technologies Used
 - HTML, JavaScript
