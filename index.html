@@ -3,74 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receiver Determination Tool</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 600px;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        input, button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .output {
-            margin-top: 20px;
-            padding: 10px;
-            background: #e9ecef;
-            border-radius: 5px;
-            min-height: 50px;
-        }
-    </style>
+    <title>SAP PI/PO Receiver Determination Comparison</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h2>Receiver Determination Tool</h2>
-        <input type="text" id="inputField" placeholder="Enter receiver details...">
-        <button onclick="processReceiver()">Determine Receiver</button>
-        <div class="output" id="output"></div>
-    </div>
-    <script>
-        function processReceiver() {
-            const input = document.getElementById("inputField").value;
-            const outputDiv = document.getElementById("output");
-            if (input.trim() === "") {
-                outputDiv.innerHTML = "<p style='color: red;'>Please enter a valid input.</p>";
-                return;
-            }
-            outputDiv.innerHTML = `<p><strong>Determined Receiver:</strong> ${input.toUpperCase()}</p>`;
-        }
-    </script>
+    <h2>SAP PI/PO Receiver Determination Comparison Tool</h2>
+    <textarea id="devXML" rows="10" cols="50" placeholder="Paste Dev XML here..."></textarea><br>
+    <textarea id="prodXML" rows="10" cols="50" placeholder="Paste Prod XML here..."></textarea><br>
+    <button onclick="compareXML()">Compare</button>
+    <button onclick="exportHighlightedRowsToExcel()">Export Highlighted Differences</button>
+    <div id="output"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
