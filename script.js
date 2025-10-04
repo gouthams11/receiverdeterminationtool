@@ -1,3 +1,4 @@
+// script.js
 function parseXML(xmlString) {
     const parser = new DOMParser();
     return parser.parseFromString(xmlString, "text/xml");
@@ -59,14 +60,14 @@ function compareXML() {
 }
 
 function displayComparison(devConditions, prodConditions) {
-    let output = "<table border='1'><tr><th>Component</th><th>Dev Condition</th><th>Prod Condition</th></tr>";
+    let output = "<table><tr><th>Component</th><th>Dev Condition</th><th>Prod Condition</th></tr>";
 
     const components = new Set([...devConditions.map(dc => dc.component), ...prodConditions.map(pc => pc.component)]);
 
     components.forEach(component => {
         const devCondition = devConditions.find(dc => dc.component === component)?.condition || "-";
         const prodCondition = prodConditions.find(pc => pc.component === component)?.condition || "-";
-        const rowClass = devCondition !== prodCondition ? "style='background-color: yellow;'" : "";
+        const rowClass = devCondition !== prodCondition ? "class='diff-row'" : "";
 
         output += `<tr ${rowClass}><td>${component}</td><td>${devCondition}</td><td>${prodCondition}</td></tr>`;
     });
@@ -77,12 +78,17 @@ function displayComparison(devConditions, prodConditions) {
 
 function exportHighlightedRowsToExcel() {
     let table = document.querySelector("table");
+    if (!table) {
+        alert("No comparison results to export. Please run a comparison first.");
+        return;
+    }
+    
     let rows = table.querySelectorAll("tr");
     let data = [];
 
     // Extract only highlighted rows
     rows.forEach(row => {
-        if (row.style.backgroundColor === "yellow") {
+        if (row.classList.contains("diff-row")) {
             let rowData = [];
             row.querySelectorAll("td").forEach(cell => {
                 rowData.push(cell.innerText.trim());
