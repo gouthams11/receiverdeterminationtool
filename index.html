@@ -4,131 +4,17 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="x-icon" href="logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAP PI/PO Receiver Determination Tool</title>
+    <title>SAP PI/PO Receiver Determination Comparison</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo">SAP</div>
-                    <h1>PI/PO Receiver Determination Tool</h1>
-                </div>
-                <div class="stats" id="stats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="totalConditions">0</span>
-                        <span class="stat-label">Total Conditions</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="differences">0</span>
-                        <span class="stat-label">Differences</span>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <div class="main-content">
-            <div class="input-section">
-                <div class="input-card">
-                    <div class="card-header">
-                        <h3>Development Environment</h3>
-                        <button class="btn-secondary" onclick="clearInput('devXML')">Clear</button>
-                    </div>
-                    <div class="textarea-wrapper">
-                        <textarea id="devXML" placeholder="Paste your Development XML configuration here..."></textarea>
-                        <div class="input-info" id="devInfo">No XML loaded</div>
-                    </div>
-                </div>
-
-                <div class="input-card">
-                    <div class="card-header">
-                        <h3>Production Environment</h3>
-                        <button class="btn-secondary" onclick="clearInput('prodXML')">Clear</button>
-                    </div>
-                    <div class="textarea-wrapper">
-                        <textarea id="prodXML" placeholder="Paste your Production XML configuration here..."></textarea>
-                        <div class="input-info" id="prodInfo">No XML loaded</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="action-section">
-                <button class="btn-primary" onclick="compareXML()">
-                    <span>🔍</span> Compare Configurations
-                </button>
-                <button class="btn-success" onclick="exportHighlightedRowsToExcel()" disabled id="exportBtn">
-                    <span>📊</span> Export Differences
-                </button>
-                <button class="btn-secondary" onclick="exportFullReport()">
-                    <span>📋</span> Full Report
-                </button>
-                <button class="btn-secondary" onclick="showXMLPreview()">
-                    <span>👁️</span> Preview XML
-                </button>
-            </div>
-
-            <div class="filter-section" id="filterSection" style="display: none;">
-                <div class="filter-controls">
-                    <input type="text" id="searchFilter" placeholder="Search components or conditions..." onkeyup="filterResults()">
-                    <select id="viewFilter" onchange="filterResults()">
-                        <option value="all">All Results</option>
-                        <option value="differences">Differences Only</option>
-                        <option value="matching">Matching Only</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="results-section" id="resultsSection" style="display: none;">
-                <div class="results-header">
-                    <h2>Comparison Results</h2>
-                    <div class="legend">
-                        <span class="legend-item difference">Different</span>
-                        <span class="legend-item matching">Matching</span>
-                        <span class="legend-item missing">Missing</span>
-                    </div>
-                </div>
-                <div id="output"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal for XML Preview -->
-    <div id="xmlModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>XML Preview</h3>
-                <span class="close" onclick="closeModal()">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="tab-container">
-                    <div class="tabs">
-                        <button class="tab active" onclick="showTab('dev')">Development</button>
-                        <button class="tab" onclick="showTab('prod')">Production</button>
-                    </div>
-                    <div class="tab-content">
-                        <div id="devTab" class="tab-pane active">
-                            <pre><code id="devXMLPreview" class="language-xml"></code></pre>
-                        </div>
-                        <div id="prodTab" class="tab-pane">
-                            <pre><code id="prodXMLPreview" class="language-xml"></code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Loading Spinner -->
-    <div id="loadingSpinner" class="loading-spinner">
-        <div class="spinner"></div>
-        <p>Processing XML configurations...</p>
-    </div>
+    <h2>SAP PI/PO Receiver Determination Comparison Tool</h2>
+    <textarea id="devXML" rows="10" cols="50" placeholder="Paste Dev XML here..."></textarea><br>
+    <textarea id="prodXML" rows="10" cols="50" placeholder="Paste Prod XML here..."></textarea><br>
+    <button onclick="compareXML()">Compare</button>
+    <button onclick="exportHighlightedRowsToExcel()">Export Highlighted Differences</button>
+    <div id="output"></div>
 
     <script src="script.js"></script>
 </body>
