@@ -1,4 +1,3 @@
-// script.js
 function parseXML(xmlString) {
     const parser = new DOMParser();
     return parser.parseFromString(xmlString, "text/xml");
@@ -46,7 +45,7 @@ function compareXML() {
     const prodXMLString = document.getElementById("prodXML").value.trim();
 
     if (!devXMLString || !prodXMLString) {
-        alert("Please paste both Dev and Prod XML contents.");
+        alert("Please paste both QA and Production XML contents.");
         return;
     }
 
@@ -60,14 +59,22 @@ function compareXML() {
 }
 
 function displayComparison(devConditions, prodConditions) {
-    let output = "<table><tr><th>Component</th><th>Dev Condition</th><th>Prod Condition</th></tr>";
+    const showOnlyDiff = document.getElementById("showOnlyDiff").checked;
+    let output = "<table><tr><th>Component</th><th>QA Condition</th><th>Production Condition</th></tr>";
 
     const components = new Set([...devConditions.map(dc => dc.component), ...prodConditions.map(pc => pc.component)]);
 
     components.forEach(component => {
         const devCondition = devConditions.find(dc => dc.component === component)?.condition || "-";
         const prodCondition = prodConditions.find(pc => pc.component === component)?.condition || "-";
-        const rowClass = devCondition !== prodCondition ? "class='diff-row'" : "";
+        const isDifferent = devCondition !== prodCondition;
+        
+        // If "Show only differences" is checked, skip rows that are not different
+        if (showOnlyDiff && !isDifferent) {
+            return;
+        }
+        
+        const rowClass = isDifferent ? "class='diff-row'" : "";
 
         output += `<tr ${rowClass}><td>${component}</td><td>${devCondition}</td><td>${prodCondition}</td></tr>`;
     });
@@ -103,8 +110,8 @@ function exportHighlightedRowsToExcel() {
     }
 
     // Convert data to Excel format
-    let ws = XLSX.utils.aoa_to_sheet([["Component", "Dev Condition", "Prod Condition"], ...data]);
+    let ws = XLSX.utils.aoa_to_sheet([["Component", "QA Condition", "Production Condition"], ...data]);
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Differences");
-    XLSX.writeFile(wb, "Highlighted_Differences.xlsx");
+    XLSX.writeFile(wb, "Communication_Channel_Differences.xlsx");
 }
