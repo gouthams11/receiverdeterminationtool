@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="shortcut icon" type="x-icon" href="logo.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAP PI/PO Receiver Determination Comparison</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="x-icon" href="logo.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAP PIPO Receiver Determination Comparison</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
-    <h2>SAP PI/PO Receiver Determination Comparison Tool</h2>
-    <textarea id="devXML" rows="10" cols="50" placeholder="Paste Dev XML here..."></textarea><br>
-    <textarea id="prodXML" rows="10" cols="50" placeholder="Paste Prod XML here..."></textarea><br>
-    <button onclick="compareXML()">Compare</button>
-    <button onclick="exportHighlightedRowsToExcel()">Export Highlighted Differences</button>
+  <div class="header">
+    <img src="logo.jpg" alt="Logo" class="logo" />
+    <h2>SAP PIPO Receiver Determination Comparison Tool</h2>
+  </div>
+  <div class="container">
+    <div class="input-section">
+      <textarea id="devXML" rows="10" cols="50" placeholder="Paste Dev XML here..."></textarea>
+      <textarea id="prodXML" rows="10" cols="50" placeholder="Paste Prod XML here..."></textarea>
+    </div>
+    <div class="button-group">
+      <button onclick="compareXML()">Compare</button>
+      <button onclick="exportHighlightedRowsToExcel()">Export Highlighted Differences</button>
+    </div>
     <div id="output"></div>
-
-    <script src="script.js"></script>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
